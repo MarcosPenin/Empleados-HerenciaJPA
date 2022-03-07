@@ -1,16 +1,32 @@
-package pojo;
+package modelo;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.*;
+
+
+
+@Entity
 public class Empresa {
 
+	@Id
 	private String cif;
 	private String nombre;
 	private String direccion;
 	private String telefono;
 
-	private Set<Producto> productos;
-	private Set<Empleado> empleados;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "cif")
+	private Set<Producto> productos= new HashSet<>();
+	
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JoinColumn(name = "cif")
+
+	private Set<Empleado> empleados = new HashSet<>();
 	
 	public Empresa() {}
 	
@@ -77,5 +93,20 @@ public class Empresa {
 	public void addEmpleado(Empleado empleado) {
 		empleados.add(empleado);
 	}
+	
+	public String toString() {
+		String mensaje= "***************************************************\nEMPRESA: "+nombre+" Cif: "+cif+ "   Empleados: ";
+		for (Empleado x: empleados) {
+			mensaje+= "\n"+x.toString();
+		}
+		return mensaje;
+		
+		
+	}
+	
+	
+	
+	
+	
 
 }

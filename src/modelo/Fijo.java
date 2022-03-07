@@ -1,5 +1,11 @@
-package pojo;
+package modelo;
 
+import modelo.Empleado;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+
+@Entity
+@PrimaryKeyJoinColumn()
 public class Fijo extends Empleado {
 
 	private int salarioBase;
@@ -13,6 +19,7 @@ public class Fijo extends Empleado {
 		super(dni, nombre, telefono,porcentajeRetencion);
 		this.salarioBase = salarioBase;
 		this.trienios = trienios;
+		calculoNomina();
 	}
 
 	
@@ -34,10 +41,9 @@ public class Fijo extends Empleado {
 
 
 	public void calculoNomina() {
-		float sueldo=(salarioBase+trienios)-(salarioBase+trienios)*super.getPorcentajeRetencion();
+		float sueldo=(salarioBase+trienios)-(salarioBase+trienios)*super.getPorcentajeRetencion()/100;
 		super.setSueldo(sueldo);
 	}
 	
-	
-	
+
 }

@@ -1,21 +1,38 @@
-package pojo;
+package modelo;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import javax.persistence.*;
 
-public class Venta {
-
+@Entity
+public class Venta implements Serializable {
+	@Id
 	private LocalDateTime fechaVenta;
-	private String codigoArticulo;
+	
 	private int numeroUnidades;
 	private float importe;
 	
-	public Venta() {}
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="codigoProducto")
+	@Id
+	private Producto producto;
+	
+	
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="dni")
+	private Temporal temporal;
 
-	public Venta(LocalDateTime fechaVenta, String codigoArticulo, int numeroUnidades, float importe) {
+	public Venta() {
+	}
+
+	public Venta(LocalDateTime fechaVenta, Producto producto, int numeroUnidades, float importe, Temporal t1) {
 		this.fechaVenta = fechaVenta;
-		this.codigoArticulo = codigoArticulo;
+		this.producto = producto;
 		this.numeroUnidades = numeroUnidades;
 		this.importe = importe;
+		this.temporal=t1;
 	}
 
 	public LocalDateTime getFechaVenta() {
@@ -26,12 +43,12 @@ public class Venta {
 		this.fechaVenta = fechaVenta;
 	}
 
-	public String getCodigoArticulo() {
-		return codigoArticulo;
+	public Producto getProducto() {
+		return producto;
 	}
 
-	public void setCodigoArticulo(String codigoArticulo) {
-		this.codigoArticulo = codigoArticulo;
+	public void setProducto(String codigoArticulo) {
+		this.producto =producto;
 	}
 
 	public int getNumeroUnidades() {
@@ -49,11 +66,5 @@ public class Venta {
 	public void setImporte(float importe) {
 		this.importe = importe;
 	}
-	
-	
-	
-	
 
-	
-	
 }

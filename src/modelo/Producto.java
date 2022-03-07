@@ -1,22 +1,29 @@
-package pojo;
+package modelo;
 
+import javax.persistence.*;
+
+@Entity
 public class Producto {
 
-	private String codigo;
+	@Id
+	private String codigoProducto;
 	private int stockActual;
 	private final int stockMinimo=30;
 	float precioUnidad;
 	
+	
+	@ManyToOne
+	@JoinColumn(name="cif")
 	private Empresa empresa;
 	
 	public Producto() {}
 
 	public String getCodigo() {
-		return codigo;
+		return codigoProducto;
 	}
 
 	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+		this.codigoProducto = codigo;
 	}
 
 	public int getStockActual() {
@@ -40,12 +47,14 @@ public class Producto {
 	}
 
 	public Producto(String codigo, int stockActual, float precioUnidad) {
-		this.codigo = codigo;
+		this.codigoProducto = codigo;
 		this.stockActual = stockActual;
 		this.precioUnidad = precioUnidad;
 	}
 	
-	
+	public String toString() {
+		return "Codigo producto: "+codigoProducto+" Stock actual: "+stockActual+" Precio unidad "+precioUnidad;
+	}
 	
 
 }

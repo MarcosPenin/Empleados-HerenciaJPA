@@ -1,21 +1,23 @@
-package pojo;
+package modelo;
 
 import java.util.Set;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
-
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Empleado")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Empleado {
 
+	@Id
 	private String dni;
 	private String nombre;
 	private String telefono;
 	private float porcentajeRetencion;
 	private float sueldo = 0;
 
+	@ManyToOne
+	@JoinColumn(name = "cif")
+	private Empresa empresa;
 
 	public Empleado() {
 	}
@@ -25,6 +27,7 @@ public abstract class Empleado {
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.porcentajeRetencion = porcentajeRetencion;
+		calculoNomina();
 	}
 
 	public String getDni() {
@@ -59,7 +62,6 @@ public abstract class Empleado {
 		this.porcentajeRetencion = porcentajeRetencion;
 	}
 
-
 	public float getSueldo() {
 		return sueldo;
 	}
@@ -69,5 +71,9 @@ public abstract class Empleado {
 	}
 
 	public abstract void calculoNomina();
+
+	public String toString() {
+		return "Nombre: " + nombre + " DNI: " + dni + " Sueldo: " + sueldo;
+	}
 
 }
