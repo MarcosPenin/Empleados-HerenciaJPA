@@ -75,9 +75,8 @@ public class Temporal extends Empleado {
 	}
 
 	public void calculoNomina() {
-
-		// long days = fechaInicio.until(fechaFin, ChronoUnit.DAYS);
-		float sueldo = pagoDia;
+		long resta=this.fechaFin.toEpochDay()-this.fechaInicio.toEpochDay();
+		float sueldo = pagoDia*resta-pagoDia*resta*super.getPorcentajeRetencion()/100;
 		super.setSueldo(sueldo);
 
 	}

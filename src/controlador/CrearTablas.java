@@ -17,7 +17,7 @@ public class CrearTablas {
 
 	public static void crearTablas(Session session) {
 
-	
+		session.beginTransaction();
 		
 		Fijo f1 = new Fijo("39453679P", "Fijo 1", "986454545", 10, 1000, 5);
 		Fijo f2 = new Fijo("39453678P", "Fijo 2", "986454545", 11, 1111, 6);
@@ -32,9 +32,9 @@ public class CrearTablas {
 		LocalDate fecha6 = LocalDate.of(2018, 9, 30);
 
 		Temporal t1 = new Temporal("39453676P", "Temporal 1", "986454545", 10, fecha1, fecha2, 50);
-		Temporal t2 = new Temporal("39453675P", "Temporal 1", "986454545", 10, fecha3, fecha4, 50);
-		Temporal t3 = new Temporal("39453674P", "Temporal 1", "986454545", 10, fecha5, fecha6, 50);
-	
+		Temporal t2 = new Temporal("39453675P", "Temporal 2", "986454545", 10, fecha3, fecha4, 50);
+		Temporal t3 = new Temporal("39453674P", "Temporal 3", "986454545", 10, fecha5, fecha6, 50);
+		
 		
 		Producto p1=new Producto("1",50,100);
 		Producto p2=new Producto("2",100,111);

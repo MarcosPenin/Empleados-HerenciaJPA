@@ -27,7 +27,6 @@ public abstract class Empleado {
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.porcentajeRetencion = porcentajeRetencion;
-		calculoNomina();
 	}
 
 	public String getDni() {
